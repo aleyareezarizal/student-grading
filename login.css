@@ -96,13 +96,14 @@
     padding: 12px;
     background-color: #ffffff;
     color: #10458a;
-    border: 1;
+    border: 1px solid #0c274b;
     border-radius: 5px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     display: block;
     margin: 15px 0 15px 0;
+
 
 }
 
