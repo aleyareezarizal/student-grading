@@ -1,0 +1,56 @@
+/*GENERAL*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    color: #171212;
+}
+
+
+/*HEADER*/
+
+.header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.title {
+    color: #171212;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.link-logout {
+    display: inline-block;
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #10458a;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.link-logout:hover {
+    background-color: #c41a1a;
+    color: #fff !important;
+    text-align: center;
+
+
+.link-logout::after {
+    display: none;
+    text-align: center;
+}
+
+
