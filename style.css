@@ -311,6 +311,45 @@ body {
     color: #fff;
 }
 
+a {
+  display: inline-block; /*fr search btn*/
+  margin-top: 10px;
+  text-decoration: none;
+  color:  #10458a;
+  font-weight: bold;
+}
+
+input[type="text"] { /*untuk search bar*/
+  padding: 5px;
+  width: 500px;          
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+  margin: 10px;
+  margin-left: 1px;
+}
+
+input[type="submit"] {
+  padding: 8px 16px;
+  background-color: #10458a;; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3; 
+}
+
+a:hover {
+  text-transform: #0056b3; 
+}
+
+
+
+
 
 
 

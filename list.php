@@ -46,6 +46,8 @@ if(!isset($_SESSION['user_id'])) {
     <input type="submit" value="Search">
     <a href="list.php">Show All</a><br>
 
+
+
 <!-- Start an HTML table. border="1" draws the grid lines; cellpadding adds spacing inside each cell. -->
 <div class="table-container">
 <table class="user-table">
