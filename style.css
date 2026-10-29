@@ -348,6 +348,104 @@ a:hover {
 }
 
 
+/*FORM*/
+
+.form-container .marks-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 15px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.form-container .marks-row .form-group {
+    flex: 1 1 0;
+    width: 0;
+    min-width: 0;
+    margin-bottom: 15px;
+}
+
+.form-container .marks-row .form-group label {
+    display: block;
+    width: 100%;
+    margin: 0 0 10px 0;
+}
+
+.form-container .marks-row .form-group input[type="number"] {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.form-container .form-action .btn-cancel,
+.form-container .form-action input.btn-submit {
+    width: 130px;
+    height: 45px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-container .form-action .btn-cancel {
+    background-color: #fff;
+    color: #10458a;
+    border: 1px solid #10458a;
+    text-decoration: none;
+}
+
+.form-container .form-action .btn-submit {
+    background-color: #10458a;
+    color: #fff;
+    border: 1px solid #10458a;
+}
+
+.form-container .form-action .btn-cancel:hover {
+    background-color: #10458a;
+    color: #fff;
+}
+
+.form-container .form-action .btn-submit:hover {
+    background-color: #fff;
+    color: #10458a;
+}
+
+
+/*DELETE PAGE*/
+
+.form-container .form-action .btn-cancel,
+.form-container .form-action .btn-submit {
+    width: 130px;
+    height: 45px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+
+
+
+
+
 
 
 
