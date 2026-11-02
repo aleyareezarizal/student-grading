@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include 'db.php';
@@ -15,37 +16,61 @@ if (isset($_POST['save'])) {
     $subject_name = trim($_POST['subject_name']);
     $subject_code = trim($_POST['subject_code']);
 
-    $test1 = $_POST['test1'];
-    $test2 = $_POST['test2'];
-    $final_exam = $_POST['final_exam'];
+    $test1 = (float) $_POST['test1'];
+    $test2 = (float) $_POST['test2'];
+    $final_exam = (float) $_POST['final_exam'];
 
-    $stmt = $conn->prepare(
-        "INSERT INTO results
-        (student_name, matric_no, subject_name, subject_code,
-         test1, test2, final_exam, final_marks, grade)
-        VALUES (?, ?, ?, ?, ?, ?, ?, NULL, NULL)"
-    );
-
-    $stmt->bind_param(
-        "sssssss",
-        $student_name,
-        $matric_no,
-        $subject_name,
-        $subject_code,
-        $test1,
-        $test2,
-        $final_exam
-    );
-
-    if ($stmt->execute()) {
-        $stmt->close();
-        header("Location: list.php");
-        exit();
+    if (
+        $test1 < 0 || $test1 > 20 ||
+        $test2 < 0 || $test2 > 30 ||
+        $final_exam < 0 || $final_exam > 50
+    ) {
+        $error = "Invalid marks. Test 1: 0-20, Test 2: 0-30, Final Exam: 0-50.";
     } else {
-        $error = "Failed to save the student record.";
-    }
+        $final_marks = $test1 + $test2 + $final_exam;
 
-    $stmt->close();
+        if ($final_marks >= 80) {
+            $grade = "A";
+        } elseif ($final_marks >= 65) {
+            $grade = "B";
+        } elseif ($final_marks >= 50) {
+            $grade = "C";
+        } elseif ($final_marks >= 40) {
+            $grade = "D";
+        } else {
+            $grade = "E";
+        }
+
+        $stmt = $conn->prepare(
+            "INSERT INTO results
+            (student_name, matric_no, subject_name, subject_code,
+             test1, test2, final_exam, final_marks, grade)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+
+        $stmt->bind_param(
+            "ssssdddds",
+            $student_name,
+            $matric_no,
+            $subject_name,
+            $subject_code,
+            $test1,
+            $test2,
+            $final_exam,
+            $final_marks,
+            $grade
+        );
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            header("Location: list.php");
+            exit();
+        } else {
+            $error = "Failed to save the student record.";
+        }
+
+        $stmt->close();
+    }
 }
 ?>
 
@@ -146,7 +171,7 @@ if (isset($_POST['save'])) {
                         value="<?php echo htmlspecialchars($_POST['test2'] ?? ''); ?>"
                         required>
                 </div>
-
+            
                 <div class="form-group">
                     <label for="final_exam">Final Exam</label>
                     <input type="number" id="final_exam"
@@ -154,8 +179,7 @@ if (isset($_POST['save'])) {
                         step="0.01" placeholder="0 - 50"
                         value="<?php echo htmlspecialchars($_POST['final_exam'] ?? ''); ?>"
                         required>
-                </div>
-
+        </div>
             </div>
 
             <div class="form-action">
