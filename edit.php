@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include 'db.php';
@@ -37,83 +36,52 @@ if (isset($_POST['update'])) {
     $subject_name = trim($_POST['subject_name']);
     $subject_code = trim($_POST['subject_code']);
 
-    $test1 = (float) $_POST['test1'];
-    $test2 = (float) $_POST['test2'];
-    $final_exam = (float) $_POST['final_exam'];
+    $test1 = $_POST['test1'];
+    $test2 = $_POST['test2'];
+    $final_exam = $_POST['final_exam'];
 
-    if (
-        $test1 < 0 || $test1 > 20 ||
-        $test2 < 0 || $test2 > 30 ||
-        $final_exam < 0 || $final_exam > 50
-    ) {
-        $error = "Invalid marks. Test 1: 0-20, Test 2: 0-30, Final Exam: 0-50.";
-    } elseif (
-        !is_numeric($_POST['test1']) ||
-        !is_numeric($_POST['test2']) ||
-        !is_numeric($_POST['final_exam'])
-    ) {
-        $error = "Please enter valid marks.";
+    $stmt = $conn->prepare(
+        "UPDATE results SET
+            student_name = ?,
+            matric_no = ?,
+            subject_name = ?,
+            subject_code = ?,
+            test1 = ?,
+            test2 = ?,
+            final_exam = ?,
+            final_marks = NULL,
+            grade = NULL
+         WHERE student_id = ?"
+    );
+
+    $stmt->bind_param(
+        "sssssssi",
+        $student_name,
+        $matric_no,
+        $subject_name,
+        $subject_code,
+        $test1,
+        $test2,
+        $final_exam,
+        $id
+    );
+
+    if ($stmt->execute()) {
+        $stmt->close();
+        header("Location: list.php");
+        exit();
     } else {
-
-        $final_marks = $test1 + $test2 + $final_exam;
-
-        if ($final_marks >= 80) {
-            $grade = "A";
-        } elseif ($final_marks >= 65) {
-            $grade = "B";
-        } elseif ($final_marks >= 50) {
-            $grade = "C";
-        } elseif ($final_marks >= 40) {
-            $grade = "D";
-        } else {
-            $grade = "E";
-        }
-
-        $stmt = $conn->prepare(
-            "UPDATE results SET
-                student_name = ?,
-                matric_no = ?,
-                subject_name = ?,
-                subject_code = ?,
-                test1 = ?,
-                test2 = ?,
-                final_exam = ?,
-                final_marks = ?,
-                grade = ?
-             WHERE student_id = ?"
-        );
-
-        $stmt->bind_param(
-            "ssssddddsi",
-            $student_name,
-            $matric_no,
-            $subject_name,
-            $subject_code,
-            $test1,
-            $test2,
-            $final_exam,
-            $final_marks,
-            $grade,
-            $id
-        );
-
-        if ($stmt->execute()) {
-            $stmt->close();
-            header("Location: list.php");
-            exit();
-        } else {
-            $error = "Failed to update the student record.";
-            $stmt->close();
-        }
+        $error = "Failed to update the student record.";
+        $stmt->close();
     }
 
     $row['student_name'] = $student_name;
     $row['matric_no'] = $matric_no;
     $row['subject_name'] = $subject_name;
     $row['subject_code'] = $subject_code;
-    $row['test1'] = $_POST['test1'];
-    $row['test2'] = $_POST['test2'];
-    $row['final_exam'] = $_POST['final_exam'];
+    $row['test1'] = $test1;
+    $row['test2'] = $test2;
+    $row['final_exam'] = $final_exam;
 }
 ?>
 
@@ -222,7 +190,8 @@ if (isset($_POST['update'])) {
                         step="0.01"
                         value="<?php echo htmlspecialchars((string)$row['final_exam']); ?>"
                         required>
-        </div>
+                </div>
+
             </div>
 
             <div class="form-action">
