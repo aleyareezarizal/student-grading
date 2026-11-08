@@ -441,7 +441,85 @@ a:hover {
     text-decoration: none;
 }
 
+/*VIEW PAGE*/
+.view-card {
+    max-width: 450px;
+    margin: 40px auto;
+    background: #ffffff;
+    border: 3px solid #004085; 
+    border-radius: 10px;
+    padding: 25px 30px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
 
+.view-no {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.view-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #004085;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #004085; 
+}
+
+.grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.grid-3col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.grid-2col.no-border {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.field-box label {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.field-box span {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #222;
+}
+
+/* Back Button */
+.btn-back {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 18px;
+    background-color: #004085;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.btn-back:hover {
+    background-color: #002752;
+}
 
 
 

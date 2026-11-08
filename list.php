@@ -106,6 +106,7 @@ if ($result && $result->num_rows > 0) {
         <td>".number_format($row['final_marks'], 2)."</td>
         <td>".htmlspecialchars($row['grade'])."</td>
         <td>
+          <a href='view.php?id=".$row['student_id']."' class='btn-view'>View</a> |
           <a href='edit.php?id=".$row['student_id']."' class='btn-edit'>Edit</a> |
           <a href='delete.php?id=".$row['student_id']."' class='btn-delete' onclick=\"return confirm('Delete record?')\">Delete</a>
         </td>
