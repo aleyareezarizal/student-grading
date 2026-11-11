@@ -1,6 +1,6 @@
 <?php
-session_start();
-include 'db.php';
+session_start(); 
+include 'db.php'; //important to connect to the database
 
 // 1. Check if user is logged in
 if(!isset($_SESSION['user_id'])) {
@@ -8,21 +8,17 @@ if(!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// 2. Get the student ID from the URL (e.g., view.php?id=3)
+// 2. Get the student record number (e.g., "No . 1")
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-if ($id <= 0) {
-    header("Location: list.php");
-    exit();
-}
-
 // 3. Prepare and run the SQL query to fetch ONLY this specific student's record
-$sql = "SELECT * FROM results WHERE student_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
+$sql = "SELECT * FROM results WHERE student_id = ?"; // "?" is a placeholder for the student_id value to prevent SQL injection
+$stmt = $conn->prepare($sql); //sending back the blank form to database and telling it to get ready to fill in "?"
+$stmt->bind_param("i", $id); //"1" tell MySQL that the value go into "?" just interger
+$stmt->execute(); //search the database
+$result = $stmt->get_result(); //find result and collect it
 
+// Check if the record exists
 if ($result->num_rows === 0) {
 echo "Record not found.";
 exit();
