@@ -16,7 +16,7 @@ if ($search != '') {
     $safe_search = $conn->real_escape_string($search);
     
     $sql = "SELECT * FROM results 
-            WHERE student_name LIKE '%$safe_search%' 
+            WHERE student_name LIKE '%$safe_search%'   
                OR matric_no LIKE '%$safe_search%' 
                OR subject_name LIKE '%$safe_search%' 
                OR subject_code LIKE '%$safe_search%'";
